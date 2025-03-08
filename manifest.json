@@ -1,0 +1,14 @@
+{
+    "manifest_version": 3,
+    "name": "LeetCode & Code360 Tracker",
+    "version": "1.1",
+    "description": "Track your LeetCode and Code360 progress dynamically.",
+    "permissions": ["activeTab", "storage"],
+    "icons": {
+      "128": "icon.png"
+    },
+    "action": {
+      "default_popup": "popup.html"
+    }
+  }
+  

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetCode, Code360 & GitHub Tracker</title>
+    <link rel="stylesheet" href="popup.css">
+</head>
+
+<body>
+    <h2>DSA & GitHub Tracker</h2>
+
+    <!-- DSA Tracking Section -->
+    <div id="dsa-tracker">
+        <h3>DSA Tracker</h3>
+
+        <!-- Moved Select Menu Inside DSA Tracker -->
+        <div class="select-container">
+            <label for="platform-select">Choose Platform:</label>
+            <select id="platform-select">
+                <option value="leetcode">LeetCode</option>
+                <option value="code360">Code360</option>
+            </select>
+        </div>
+
+        <!-- LeetCode Stats -->
+        <div id="leetcode-section" class="stats-container">
+            <h3>LeetCode Stats</h3>
+            <p><strong>Username:</strong> <span id="lc-username">Loading...</span></p>
+            <p class="stat-item"><strong>Total Solved:</strong> <span id="lc-totalSolved">0</span></p>
+            <p class="stat-item"><strong>Easy:</strong> <span id="lc-easy">0</span></p>
+            <p class="stat-item"><strong>Medium:</strong> <span id="lc-medium">0</span></p>
+            <p class="stat-item"><strong>Hard:</strong> <span id="lc-hard">0</span></p>
+        </div>
+
+        <!-- Code360 Stats -->
+        <div id="code360-section" class="stats-container" style="display: none;">
+            <h3>Code360 Stats</h3>
+            <p><strong>Username:</strong> <span id="code360-username">Loading...</span></p>
+            <p class="stat-item"><strong>Total Solved:</strong> <span id="code360-totalSolved">0</span></p>
+            <p class="stat-item"><strong>Rank:</strong> <span id="code360-rank">0</span></p>
+        </div>
+    </div>
+
+    <!-- GitHub Tracking Section -->
+    <div id="github-tracker">
+        <div class="stats-container">
+            <h3>GitHub Stats</h3>
+            <p><strong>Username:</strong> <span id="github-username">Loading...</span></p>
+            <p class="stat-item"><strong>Public Repos:</strong> <span id="github-repos">0</span></p>
+            <p class="stat-item"><strong>Followers:</strong> <span id="github-followers">0</span></p>
+            <p class="stat-item"><strong>Following:</strong> <span id="github-following">0</span></p>
+            <p class="stat-item"><strong>Contributions Last Year:</strong> <span id="github-contributions">0</span></p>
+        </div>
+    </div>
+
+    <script src="popup.js"></script>
+</body>
+
+</html>
