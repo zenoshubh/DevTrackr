@@ -4,55 +4,147 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LeetCode, Code360 & GitHub Tracker</title>
+    <title>DevTrackr - Coding Progress Tracker</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="popup.css">
 </head>
 
 <body>
-    <h2>DSA & GitHub Tracker</h2>
+    <div class="container">
+        <header>
+            <h1 class="logo">DevTrackr</h1>
+            <p class="subtitle">Track your coding journey</p>
+        </header>
 
-    <!-- DSA Tracking Section -->
-    <div id="dsa-tracker">
-        <h3>DSA Tracker</h3>
-
-        <!-- Moved Select Menu Inside DSA Tracker -->
-        <div class="select-container">
-            <label for="platform-select">Choose Platform:</label>
-            <select id="platform-select">
-                <option value="leetcode">LeetCode</option>
-                <option value="code360">Code360</option>
-            </select>
+        <!-- Settings Section -->
+        <div class="section settings-section">
+            <h2>Settings</h2>
+            <div class="input-group">
+                <label for="leetcode-username">LeetCode Username</label>
+                <input type="text" id="leetcode-username" placeholder="Enter your LeetCode username">
+            </div>
+            <div class="input-group">
+                <label for="code360-username">Code360 Username</label>
+                <input type="text" id="code360-username" placeholder="Enter your Code360 username">
+            </div>
+            <div class="input-group">
+                <label for="github-username">GitHub Username</label>
+                <input type="text" id="github-username" placeholder="Enter your GitHub username">
+            </div>
+            <button id="save-settings" class="btn btn-primary">Save & Fetch Data</button>
         </div>
 
-        <!-- LeetCode Stats -->
-        <div id="leetcode-section" class="stats-container">
-            <h3>LeetCode Stats</h3>
-            <p><strong>Username:</strong> <span id="lc-username">Loading...</span></p>
-            <p class="stat-item"><strong>Total Solved:</strong> <span id="lc-totalSolved">0</span></p>
-            <p class="stat-item"><strong>Easy:</strong> <span id="lc-easy">0</span></p>
-            <p class="stat-item"><strong>Medium:</strong> <span id="lc-medium">0</span></p>
-            <p class="stat-item"><strong>Hard:</strong> <span id="lc-hard">0</span></p>
+        <!-- DSA Tracker Section -->
+        <div class="section">
+            <div class="section-header">
+                <h2>DSA Progress</h2>
+                <select id="platform-select" class="platform-selector">
+                    <option value="leetcode">LeetCode</option>
+                    <option value="code360">Code360</option>
+                </select>
+            </div>
+
+            <!-- LeetCode Stats -->
+            <div id="leetcode-section" class="stats-container">
+                <div class="platform-header">
+                    <div class="platform-icon">💻</div>
+                    <h3>LeetCode</h3>
+                </div>
+                <div id="leetcode-content" class="stats-content">
+                    <div class="username-display">
+                        <span id="lc-username-display">Not configured</span>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card total">
+                            <div class="stat-number" id="lc-totalSolved">-</div>
+                            <div class="stat-label">Total Solved</div>
+                        </div>
+                        <div class="stat-card easy">
+                            <div class="stat-number" id="lc-easy">-</div>
+                            <div class="stat-label">Easy</div>
+                        </div>
+                        <div class="stat-card medium">
+                            <div class="stat-number" id="lc-medium">-</div>
+                            <div class="stat-label">Medium</div>
+                        </div>
+                        <div class="stat-card hard">
+                            <div class="stat-number" id="lc-hard">-</div>
+                            <div class="stat-label">Hard</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Code360 Stats -->
+            <div id="code360-section" class="stats-container" style="display: none;">
+                <div class="platform-header">
+                    <div class="platform-icon">⚡</div>
+                    <h3>Code360</h3>
+                </div>
+                <div id="code360-content" class="stats-content">
+                    <div class="username-display">
+                        <span id="code360-username-display">Not configured</span>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card total">
+                            <div class="stat-number" id="code360-totalSolved">-</div>
+                            <div class="stat-label">Total Solved</div>
+                        </div>
+                        <div class="stat-card rank">
+                            <div class="stat-number" id="code360-rank">-</div>
+                            <div class="stat-label">Global Rank</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Code360 Stats -->
-        <div id="code360-section" class="stats-container" style="display: none;">
-            <h3>Code360 Stats</h3>
-            <p><strong>Username:</strong> <span id="code360-username">Loading...</span></p>
-            <p class="stat-item"><strong>Total Solved:</strong> <span id="code360-totalSolved">0</span></p>
-            <p class="stat-item"><strong>Rank:</strong> <span id="code360-rank">0</span></p>
+        <!-- GitHub Stats Section -->
+        <div class="section">
+            <div class="section-header">
+                <h2>GitHub Activity</h2>
+            </div>
+            <div class="stats-container">
+                <div class="platform-header">
+                    <div class="platform-icon">🐙</div>
+                    <h3>GitHub</h3>
+                </div>
+                <div id="github-content" class="stats-content">
+                    <div class="username-display">
+                        <span id="github-username-display">Not configured</span>
+                    </div>
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-number" id="github-repos">-</div>
+                            <div class="stat-label">Public Repos</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="github-followers">-</div>
+                            <div class="stat-label">Followers</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="github-following">-</div>
+                            <div class="stat-label">Following</div>
+                        </div>
+                        <div class="stat-card">
+                            <div class="stat-number" id="github-contributions">-</div>
+                            <div class="stat-label">Contributions</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
 
-    <!-- GitHub Tracking Section -->
-    <div id="github-tracker">
-        <div class="stats-container">
-            <h3>GitHub Stats</h3>
-            <p><strong>Username:</strong> <span id="github-username">Loading...</span></p>
-            <p class="stat-item"><strong>Public Repos:</strong> <span id="github-repos">0</span></p>
-            <p class="stat-item"><strong>Followers:</strong> <span id="github-followers">0</span></p>
-            <p class="stat-item"><strong>Following:</strong> <span id="github-following">0</span></p>
-            <p class="stat-item"><strong>Contributions Last Year:</strong> <span id="github-contributions">0</span></p>
+        <!-- Loading Overlay -->
+        <div id="loading-overlay" class="loading-overlay" style="display: none;">
+            <div class="spinner"></div>
+            <p>Fetching your data...</p>
         </div>
+
+        <!-- Error Message -->
+        <div id="error-message" class="error-message" style="display: none;"></div>
     </div>
 
     <script src="popup.js"></script>
