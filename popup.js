@@ -1,32 +1,136 @@
 document.addEventListener("DOMContentLoaded", async function () {
     const platformSelect = document.getElementById("platform-select");
     const saveButton = document.getElementById("save-settings");
+    const settingsToggle = document.getElementById("settings-toggle");
+    const closeSettings = document.getElementById("close-settings");
+    const getStartedBtn = document.getElementById("get-started-btn");
+    const clearDataBtn = document.getElementById("clear-data");
     const loadingOverlay = document.getElementById("loading-overlay");
     const errorMessage = document.getElementById("error-message");
 
-    // Load saved data
-    await loadSavedSettings();
-    
-    // Load saved platform choice
-    const savedPlatform = localStorage.getItem("selectedPlatform") || "leetcode";
-    platformSelect.value = savedPlatform;
-    updatePlatformDisplay(savedPlatform);
+    // Initialize the app
+    await initializeApp();
 
     // Event listeners
-    platformSelect.addEventListener("change", function () {
-        const selectedPlatform = platformSelect.value;
-        localStorage.setItem("selectedPlatform", selectedPlatform);
-        updatePlatformDisplay(selectedPlatform);
-    });
+    if (platformSelect) {
+        platformSelect.addEventListener("change", function () {
+            const selectedPlatform = platformSelect.value;
+            localStorage.setItem("selectedPlatform", selectedPlatform);
+            updatePlatformDisplay(selectedPlatform);
+        });
+    }
 
     saveButton.addEventListener("click", handleSaveAndFetch);
-
-    // Auto-fetch data if usernames are already saved
-    const savedUsernames = getSavedUsernames();
-    if (savedUsernames.leetcode || savedUsernames.code360 || savedUsernames.github) {
-        await fetchAllData();
-    }
+    settingsToggle.addEventListener("click", showSettings);
+    closeSettings.addEventListener("click", hideSettings);
+    getStartedBtn.addEventListener("click", showSettings);
+    clearDataBtn.addEventListener("click", handleClearData);
 });
+
+async function initializeApp() {
+    const usernames = getSavedUsernames();
+    const hasAnyUsername = usernames.leetcode || usernames.code360 || usernames.github;
+
+    if (hasAnyUsername) {
+        // Show main content
+        showMainContent();
+        await loadSavedSettings();
+        
+        // Load saved platform choice
+        const savedPlatform = localStorage.getItem("selectedPlatform") || "leetcode";
+        const platformSelect = document.getElementById("platform-select");
+        if (platformSelect) {
+            platformSelect.value = savedPlatform;
+            updatePlatformDisplay(savedPlatform);
+        }
+
+        // Auto-fetch data
+        await fetchAllData();
+    } else {
+        // Show welcome screen
+        showWelcomeScreen();
+    }
+}
+
+function showWelcomeScreen() {
+    document.getElementById("welcome-section").style.display = "block";
+    document.getElementById("dsa-section").style.display = "none";
+    document.getElementById("github-section").style.display = "none";
+    document.getElementById("settings-section").style.display = "none";
+}
+
+function showMainContent() {
+    document.getElementById("welcome-section").style.display = "none";
+    document.getElementById("dsa-section").style.display = "block";
+    document.getElementById("github-section").style.display = "block";
+    document.getElementById("settings-section").style.display = "none";
+}
+
+function showSettings() {
+    document.getElementById("settings-section").style.display = "block";
+    loadSavedSettings(); // Load current values into form
+}
+
+function hideSettings() {
+    const usernames = getSavedUsernames();
+    const hasAnyUsername = usernames.leetcode || usernames.code360 || usernames.github;
+    
+    if (hasAnyUsername) {
+        document.getElementById("settings-section").style.display = "none";
+        showMainContent();
+    } else {
+        document.getElementById("settings-section").style.display = "none";
+        showWelcomeScreen();
+    }
+}
+
+async function handleClearData() {
+    if (confirm("Are you sure you want to clear all saved data? This will remove all usernames and reset the extension.")) {
+        // Clear all stored data
+        localStorage.removeItem("leetcode-username");
+        localStorage.removeItem("code360-username");
+        localStorage.removeItem("github-username");
+        localStorage.removeItem("selectedPlatform");
+
+        // Reset UI
+        resetAllStats();
+        showWelcomeScreen();
+        
+        // Clear input fields
+        document.getElementById("leetcode-username").value = "";
+        document.getElementById("code360-username").value = "";
+        document.getElementById("github-username").value = "";
+    }
+}
+
+function resetAllStats() {
+    // Reset LeetCode stats
+    updateLeetCodeUI({
+        totalSolved: "-",
+        easy: "-",
+        medium: "-",
+        hard: "-"
+    });
+
+    // Reset Code360 stats
+    updateCode360UI({
+        totalSolved: "-",
+        rank: "-"
+    });
+
+    // Reset GitHub stats
+    updateGitHubUI({
+        repos: "-",
+        followers: "-",
+        following: "-",
+        contributions: "-"
+    });
+
+    // Reset display usernames
+    document.getElementById("lc-username-display").textContent = "Not configured";
+    document.getElementById("code360-username-display").textContent = "Not configured";
+    document.getElementById("github-username-display").textContent = "Not configured";
+}
 
 function getSavedUsernames() {
     return {
@@ -68,6 +172,20 @@ async function handleSaveAndFetch() {
     document.getElementById("lc-username-display").textContent = leetcodeUsername || "Not configured";
     document.getElementById("code360-username-display").textContent = code360Username || "Not configured";
     document.getElementById("github-username-display").textContent = githubUsername || "Not configured";
+
+    // Show main content and hide settings
+    showMainContent();
+    
+    // Set default platform if not set
+    if (!localStorage.getItem("selectedPlatform")) {
+        localStorage.setItem("selectedPlatform", "leetcode");
+    }
+    
+    const platformSelect = document.getElementById("platform-select");
+    if (platformSelect) {
+        platformSelect.value = localStorage.getItem("selectedPlatform");
+        updatePlatformDisplay(platformSelect.value);
+    }
 
     await fetchAllData();
 }
