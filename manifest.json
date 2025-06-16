@@ -1,14 +1,22 @@
 {
     "manifest_version": 3,
-    "name": "LeetCode & Code360 Tracker",
-    "version": "1.1",
-    "description": "Track your LeetCode and Code360 progress dynamically.",
-    "permissions": ["activeTab", "storage"],
+    "name": "DevTrackr - Coding Progress Tracker",
+    "version": "2.0",
+    "description": "Track your coding progress across LeetCode, Code360, and GitHub with a beautiful, modern interface.",
+    "permissions": ["storage"],
+    "host_permissions": [
+        "https://leetcode-stats-api.herokuapp.com/*",
+        "https://www.naukri.com/*",
+        "https://api.github.com/*",
+        "https://github-contributions-api.jogruber.de/*"
+    ],
     "icons": {
-      "128": "icon.png"
+        "16": "icon.png",
+        "48": "icon.png",
+        "128": "icon.png"
     },
     "action": {
-      "default_popup": "popup.html"
+        "default_popup": "popup.html",
+        "default_title": "DevTrackr - Track Your Coding Journey"
     }
-  }
-  
+}
