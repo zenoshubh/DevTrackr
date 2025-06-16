@@ -14,13 +14,21 @@
 <body>
     <div class="container">
         <header>
-            <h1 class="logo">DevTrackr</h1>
-            <p class="subtitle">Track your coding journey</p>
+            <div class="header-content">
+                <div class="logo-section">
+                    <h1 class="logo">DevTrackr</h1>
+                    <p class="subtitle">Track your coding journey</p>
+                </div>
+                <button id="settings-toggle" class="settings-btn" title="Settings">⚙️</button>
+            </div>
         </header>
 
         <!-- Settings Section -->
-        <div class="section settings-section">
-            <h2>Settings</h2>
+        <div id="settings-section" class="section settings-section" style="display: none;">
+            <div class="settings-header">
+                <h2>Settings</h2>
+                <button id="close-settings" class="close-btn">×</button>
+            </div>
             <div class="input-group">
                 <label for="leetcode-username">LeetCode Username</label>
                 <input type="text" id="leetcode-username" placeholder="Enter your LeetCode username">
@@ -33,11 +41,23 @@
                 <label for="github-username">GitHub Username</label>
                 <input type="text" id="github-username" placeholder="Enter your GitHub username">
             </div>
-            <button id="save-settings" class="btn btn-primary">Save & Fetch Data</button>
+            <div class="button-group">
+                <button id="save-settings" class="btn btn-primary">Save & Fetch Data</button>
+                <button id="clear-data" class="btn btn-secondary">Clear All Data</button>
+            </div>
+        </div>
+
+        <!-- Welcome Section (shown when no usernames are configured) -->
+        <div id="welcome-section" class="section welcome-section" style="display: none;">
+            <div class="welcome-content">
+                <h2>Welcome to DevTrackr! 🚀</h2>
+                <p>Get started by configuring your usernames to track your coding progress across platforms.</p>
+                <button id="get-started-btn" class="btn btn-primary">Get Started</button>
+            </div>
         </div>
 
         <!-- DSA Tracker Section -->
-        <div class="section">
+        <div id="dsa-section" class="section" style="display: none;">
             <div class="section-header">
                 <h2>DSA Progress</h2>
                 <select id="platform-select" class="platform-selector">
@@ -102,7 +122,7 @@
         </div>
 
         <!-- GitHub Stats Section -->
-        <div class="section">
+        <div id="github-section" class="section" style="display: none;">
             <div class="section-header">
                 <h2>GitHub Activity</h2>
             </div>

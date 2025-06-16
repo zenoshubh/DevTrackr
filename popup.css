@@ -20,8 +20,17 @@ body {
 
 /* Header */
 header {
-    text-align: center;
     margin-bottom: 25px;
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo-section {
+    text-align: left;
 }
 
 .logo {
@@ -37,6 +46,26 @@ header {
     font-weight: 300;
     opacity: 0.9;
     margin-bottom: 0;
+}
+
+.settings-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.settings-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: rotate(90deg);
 }
 
 /* Sections */
@@ -66,6 +95,35 @@ header {
 /* Settings Section */
 .settings-section {
     background: rgba(255, 255, 255, 0.15);
+    position: relative;
+}
+
+.settings-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.close-btn {
+    background: rgba(244, 67, 54, 0.2);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #ffffff;
+    font-size: 20px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+    background: rgba(244, 67, 54, 0.4);
+    transform: scale(1.1);
 }
 
 .input-group {
@@ -103,6 +161,33 @@ header {
     color: rgba(255, 255, 255, 0.6);
 }
 
+/* Welcome Section */
+.welcome-section {
+    text-align: center;
+    background: rgba(76, 175, 80, 0.1);
+    border: 1px solid rgba(76, 175, 80, 0.3);
+}
+
+.welcome-content h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+    color: #ffffff;
+}
+
+.welcome-content p {
+    font-size: 16px;
+    margin-bottom: 25px;
+    opacity: 0.9;
+    line-height: 1.5;
+}
+
+/* Button Group */
+.button-group {
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
 /* Buttons */
 .btn {
     padding: 12px 24px;
@@ -126,6 +211,19 @@ header {
 .btn-primary:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(76, 175, 80, 0.4);
+}
+
+.btn-secondary {
+    background: rgba(244, 67, 54, 0.2);
+    border: 1px solid rgba(244, 67, 54, 0.3);
+    color: white;
+    width: 100%;
+}
+
+.btn-secondary:hover {
+    background: rgba(244, 67, 54, 0.3);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(244, 67, 54, 0.4);
 }
 
 /* Platform Selector */
